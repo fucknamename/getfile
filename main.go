@@ -50,7 +50,8 @@ func handleToken(w http.ResponseWriter, r *http.Request) {
 	if ok {
 		w.Write([]byte(token.(string)))
 	} else {
-		w.Write([]byte(""))
+		setToken()
+		w.Write([]byte("try again"))
 	}
 }
 
