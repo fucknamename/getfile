@@ -61,8 +61,9 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		/*
 			http://xx.xx.xx.xx:xx/getfile/ff_b/release/aadddddd
 		*/
-		path  = strings.TrimPrefix(r.URL.Path, "/")
-		parts = strings.Split(path, "/")
+		dirlen = 10
+		path   = strings.TrimPrefix(r.URL.Path, "/")
+		parts  = strings.Split(path, "/")
 	)
 
 	if len(parts) != 4 || !strings.HasPrefix(parts[0], "getfile") {
@@ -74,6 +75,12 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		strings.Contains(parts[1], ".") || strings.Contains(parts[2], ".") {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("illegal request"))
+		return
+	}
+
+	if len(parts[1]) > dirlen || len(parts[2]) > dirlen {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("too loooooooooog")) //target project dir name too long
 		return
 	}
 
