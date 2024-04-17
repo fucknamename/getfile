@@ -23,7 +23,7 @@ var (
 )
 
 func init() {
-	setToken()
+	_ = setToken()
 }
 
 func main() {
@@ -50,8 +50,8 @@ func handleToken(w http.ResponseWriter, r *http.Request) {
 	if ok {
 		w.Write([]byte(token.(string)))
 	} else {
-		setToken()
-		w.Write([]byte("try again"))
+		t := setToken()
+		w.Write([]byte(t))
 	}
 }
 
@@ -94,7 +94,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	token, ok := utils.GetCache(key_token)
 	if !ok {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("inner error"))
+		w.Write([]byte("johnny knows everything"))
 		return
 	}
 
@@ -115,10 +115,12 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func setToken() {
+func setToken() string {
 	dt := time.Now().Format(TIME_LAYOUT_FORMAT_2)
 	val := getMD5Hash(dt + "ty")
 	utils.SetCache(key_token, val)
+
+	return val
 }
 
 func getMD5Hash(text string) string {
