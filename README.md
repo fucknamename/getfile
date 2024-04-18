@@ -13,8 +13,13 @@ wget http://xx.xx.xx.xx:1688/getfile/目录1/目录2/这是token
 
 curl -o 保存文件名.zip http://xx.xx.xx.xx:1688/getfile/目录1/目录2/这是token
 
+针对https的忽略处理：
 
-编译 + 压缩：
+wget  ... --no-check-certificate
+curl ... -k
+
+
+# 编译 + 压缩：
 
 linux
 go build -ldflags="-s -w" -o getfile main.go && upx -9 getfile
@@ -28,7 +33,8 @@ cd /usr/local
 
 wget -c https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz && tar xvf upx-3.96-amd64_linux.tar.xz
 
-# 删除、重命名
+删除、重命名
+
 rm -rf upx-3.96-amd64_linux.tar.xz && mv upx-3.96-amd64_linux upx
 
 cd ~
