@@ -1,0 +1,17 @@
+{
+    // 请使用 workspaceRoot
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "getfile",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceRoot}/main.go",
+            "cwd": "${workspaceRoot}",
+            "args": [
+                "-t=C:\\code\\go\\fuckyou\\web\\template\\"
+            ]
+        }
+    ]
+}
