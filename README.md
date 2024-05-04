@@ -15,7 +15,7 @@ curl -o 保存文件名.zip http://xx.xx.xx.xx:1688/getfile/目录1/目录2/这�
 
 针对https的忽略处理：
 
-wget  ... --no-check-certificate
+wget  ... --no-check-certificate  
 curl ... -k
 
 
@@ -27,6 +27,14 @@ go build -ldflags="-s -w" -o getfile main.go && upx -9 getfile
 window
 go build -ldflags="-s -w" -o getfile.exe main.go && upx -9 getfile.exe
 
+
+# windows下打包带图标
+创建main.rc文件，写入IDI_ICON ICON "favicon.ico"  
+
+在项目根目录下打开 cmd 窗口运行下面的命令生成 main.syso 文件  
+windres -o main.syso main.rc  
+
+再执行 go build -ldflags="-s -w" && upx -9 getfile.exe
 
 # 安装upx
 cd /usr/local
