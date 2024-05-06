@@ -5,28 +5,27 @@
 
 # 使用方式
 
-使用wget方式
+使用wget方式  
+wget http://xx.xx.xx.xx:1688/getfile/目录/这是token
 
-wget http://xx.xx.xx.xx:1688/getfile/目录1/目录2/这是token
+使用curl方式  
+curl -o 保存文件名.zip http://xx.xx.xx.xx:1688/getfile/目录/这是token
 
-使用curl方式
-
-curl -o 保存文件名.zip http://xx.xx.xx.xx:1688/getfile/目录1/目录2/这是token
-
-针对https的忽略处理：
-
+针对https的忽略处理：  
 wget  ... --no-check-certificate  
 curl ... -k
 
 
 # 编译 + 压缩：
 
-linux
+linux  
 go build -ldflags="-s -w" -o getfile main.go && upx -9 getfile
 
-window
+window  
 go build -ldflags="-s -w" -o getfile.exe main.go && upx -9 getfile.exe
 
+window 下无边框  
+go build -ldflags="-H windowsgui -w -s" -o getfile.exe  main.go && upx -9 getfile.exe
 
 # windows下打包带图标
 创建main.rc文件，写入IDI_ICON ICON "favicon.ico"  
